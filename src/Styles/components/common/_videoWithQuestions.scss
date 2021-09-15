@@ -1,0 +1,39 @@
+.videoHolder {
+  width: 100%;
+  position: relative;
+  background-color: #000;
+  padding-top: 56.25%;
+}
+
+.react-player {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.react-player video {
+  height: auto !important;
+}
+
+.videoHolder:focus {
+  outline: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+* {
+  margin: 0px;
+  font-family: "Roboto";
+}
+
+/* https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting#4407335 */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
