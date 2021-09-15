@@ -1,0 +1,39 @@
+.fake_nav, .nav {
+  height: 54px;
+}
+
+.nav {
+  background: $accent-variant;
+  width: 100vw;
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+
+  .nav__li {
+    height: 100%;
+    padding: 12px;
+    color: $white;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .nav__li:hover {
+    color: $accent-yellow;
+  }
+
+  .nav__li:hover > a {
+    color: $accent-yellow;
+  }
+
+  .nav__li a {
+    color: $white;
+    text-decoration: none;
+    list-style-type: none;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-right: 5px;
+    padding: 5px;
+  }
+}
