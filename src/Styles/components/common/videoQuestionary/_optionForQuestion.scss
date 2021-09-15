@@ -1,0 +1,58 @@
+.option {
+  width: 80%;
+  cursor: pointer;
+  margin-top: 10px;
+
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid #acacac;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.option:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.checkBox {
+  min-height: 55px;
+  min-width: 55px;
+  font-weight: bold;
+
+  color: #acacac;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #acacac;
+}
+
+.checked {
+  color: white;
+  background-color: #16ce9d;
+}
+
+.questionText {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 518px) {
+  .checkBox {
+    min-height: 45px;
+    min-width: 45px;
+  }
+
+  .option {
+    font-size: 15px;
+  }
+}
+

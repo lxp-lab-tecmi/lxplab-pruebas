@@ -2,3 +2,14 @@
 @import './base/base';
 
 @import './components/common/navbar';
+
+@import "./components/common/_videoWithQuestions.scss";
+@import "./components/common/videoControls/_videoControls.scss";
+@import "./components/common/videoControls/_rangeSeekInput.scss";
+@import "./components/common/videoControls/_videoTimeStamp.scss";
+@import "./components/common/videoControls/_playPauseButton.scss";
+@import "./components/common/videoQuestionary/_bottomBar.scss";
+@import "./components/common/videoQuestionary/_openAnswer.scss";
+@import "./components/common/videoQuestionary/_closedAnswers.scss";
+@import "./components/common/videoQuestionary/_videoQuestionary.scss";
+@import "./components/common/videoQuestionary/_optionForQuestion.scss";

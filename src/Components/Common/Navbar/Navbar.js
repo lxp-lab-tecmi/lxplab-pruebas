@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Navbar = ({ paths }) => {
+export default function Navbar({ paths }) {
   const routes = [];
   for (const { path, title } of paths)
     routes.push(
@@ -18,4 +18,4 @@ export const Navbar = ({ paths }) => {
       <div className="fake_nav"></div>
     </header>
   );
-};
+}
