@@ -14,7 +14,9 @@ export default function Navbar({ paths }) {
 
   return (
     <header>
-      <nav className="nav">{routes}</nav>
+      <nav className="nav" style={{ zIndex: "999" }}>
+        {routes}
+      </nav>
       <div className="fake_nav"></div>
     </header>
   );

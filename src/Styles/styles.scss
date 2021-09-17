@@ -1,7 +1,9 @@
-@import './base/settings';
-@import './base/base';
+@import "~bootstrap/scss/bootstrap";
 
-@import './components/common/navbar';
+@import "./base/settings";
+@import "./base/base";
+
+@import "./components/common/navbar";
 
 @import "./components/common/_videoWithQuestions.scss";
 @import "./components/common/videoControls/_videoControls.scss";

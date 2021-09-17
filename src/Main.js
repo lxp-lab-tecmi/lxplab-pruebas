@@ -6,17 +6,17 @@ import Navbar from "./Components/Common/Navbar/Navbar";
 import "./Styles/styles.scss";
 
 export const Main = () => {
-  const paths = [
-    { path: "/", title: "Inicio" }, //
-    { path: "/videowithquestions", title: "Video cuestionario" }, //
+  const pathsToDraw = [
+    { path: "/", title: "Inicio" },
+    { path: "/videowithquestions", title: "Video cuestionario" },
   ];
 
   return (
     <BrowserRouter>
-      <Navbar paths={paths} />
-      <div>
+      <Navbar paths={pathsToDraw} />
+      <React.Fragment>
         <AppRouter />
-      </div>
+      </React.Fragment>
     </BrowserRouter>
   );
 };
