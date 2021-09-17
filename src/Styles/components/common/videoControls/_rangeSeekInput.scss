@@ -2,11 +2,12 @@
 .video-progress {
   cursor: pointer;
   touch-action: none;
+  transition: none;
 }
 .video-progress {
   width: 100%;
   height: 29px;
-  margin: 3px 15px;
+  margin: 3px 10px;
   position: relative;
   background-color: #d4d4d4;
 }
@@ -44,12 +45,12 @@
 }
 
 .interaction-point::before {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   content: " ";
   display: block;
   margin-top: 7px;
-  margin-left: -7px;
+  margin-left: -6px;
   border-radius: 50%;
   border: 3px solid #00786e;
   background: linear-gradient(#fff 40%, #e8e8e8);
