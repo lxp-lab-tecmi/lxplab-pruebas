@@ -1,0 +1,14 @@
+@import "./carrousel";
+@import "./intro";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    font-family: 'DM Sans', sans-serif;
+}
