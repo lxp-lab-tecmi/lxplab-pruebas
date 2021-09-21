@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { useHolderjs } from "use-holderjs";
 
-export default function IndexScreen() {
+export const IndexScreen = () => {
   useHolderjs();
   return (
     <div className="main">
@@ -31,4 +31,4 @@ export default function IndexScreen() {
       </div>
     </div>
   );
-}
+};

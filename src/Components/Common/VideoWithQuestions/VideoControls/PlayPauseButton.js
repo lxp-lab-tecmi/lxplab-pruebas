@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 
-import ICONS from "../../../../../Utils/icons";
+import ICONS from "../../../../Utils/icons";
 
-import { useVideoPlayingUpdate, useVideoPlaying } from "../../Context/VideoContext";
+import { useVideoPlayingUpdate, useVideoPlaying } from "../Context/VideoContext";
 
-export default function PlayPauseButton({ videoHolderRef }) {
+export const PlayPauseButton = ({ videoHolderRef }) => {
   const setPlaying = useVideoPlayingUpdate();
   const playing = useVideoPlaying();
   const playButtonRef = useRef();
@@ -25,4 +25,4 @@ export default function PlayPauseButton({ videoHolderRef }) {
       {playing ? ICONS.play(25, 25) : ICONS.pause(25, 25)}
     </button>
   );
-}
+};

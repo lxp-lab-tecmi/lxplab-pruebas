@@ -1,18 +1,18 @@
 import React, { useState, useRef } from "react";
 
-import BottomBar from "./BottomBar";
+import { BottomBar } from "./BottomBar";
 import { useMouseAndTouch } from "../Context/MouseAndTouchContext";
-import ClosedAnswers from "./ClosedAnswers";
-import OpenAnswer from "./OpenAnswer";
+import { ClosedAnswers } from "./ClosedAnswers";
+import { OpenAnswer } from "./OpenAnswer";
 
-export default function VideoQuestionary({
+export const VideoQuestionary = ({
   time,
   display,
   handleGoBack,
   questionData,
   totalQuestions,
   handleSubmitAnswer,
-}) {
+}) => {
   const mouseAndTouchState = useMouseAndTouch();
 
   const [selectedOption, setSelectedOption] = useState(null);
@@ -94,4 +94,4 @@ export default function VideoQuestionary({
       </div>
     </div>
   );
-}
+};

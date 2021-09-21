@@ -1,4 +1,4 @@
-import VideoWithQuestions from "./VideoWithQuestions";
+import { VideoWithQuestions } from "./VideoWithQuestions";
 import { VideoProvider } from "./Context/VideoContext";
 
 export default function index(props) {
