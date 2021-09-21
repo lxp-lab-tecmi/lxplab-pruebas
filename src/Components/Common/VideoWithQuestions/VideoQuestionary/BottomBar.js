@@ -1,8 +1,8 @@
 import React from "react";
 
-import ICONS from "../../../../../Utils/icons";
+import ICONS from "../../../../Utils/icons";
 
-export default function BottomBar({ handleGoBack, selectedOption, handleSubmitAnswer, doesOptionsHaveScrollBar }) {
+export const BottomBar = ({ handleGoBack, selectedOption, handleSubmitAnswer, doesOptionsHaveScrollBar }) => {
   return (
     <div
       className="bottom-bar-holder"
@@ -28,4 +28,4 @@ export default function BottomBar({ handleGoBack, selectedOption, handleSubmitAn
       </div>
     </div>
   );
-}
+};

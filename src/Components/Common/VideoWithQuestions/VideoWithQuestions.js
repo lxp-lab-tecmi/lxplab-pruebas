@@ -11,12 +11,12 @@ import {
 } from "./Context/VideoContext";
 
 import isItTimeToShowQuestion from "./VideoQuestionary/isItTimeToShowQuestion";
+import { VideoQuestionary } from "./VideoQuestionary/VideoQuestionary";
+import { VideoControls } from "./VideoControls/VideoControls";
 import React, { useState, useRef, useEffect } from "react";
-import VideoQuestionary from "./VideoQuestionary";
-import VideoControls from "./VideoControls";
 import ReactPlayer from "react-player";
 
-export default function VideoWithQuestions({ url, questions }) {
+export const VideoWithQuestions = ({ url, questions }) => {
   const playing = useVideoPlaying();
   const videoDuration = useVideoDuration();
   const playedSeconds = useVideoPlayedSeconds();
@@ -172,4 +172,4 @@ export default function VideoWithQuestions({ url, questions }) {
       </div>
     </MouseAndTouchProvider>
   );
-}
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import IndexScreen from "../Components/Index/";
-import VideoQuestionary from "../Components/VideoWithQuestions";
+import { IndexScreen } from "../Components/Index/IndexScreen";
+import { VideoQuestionary } from "../Components/VideoWithQuestions/VideoWithQuestions";
 
 export default function AppRouter() {
   return (

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-export default function OpenAnswer({ handleSelectAnswer, handleSubmitAnswer, answer }) {
+export const OpenAnswer = ({ handleSelectAnswer, handleSubmitAnswer, answer }) => {
   const textareaRef = useRef();
 
   useEffect(() => textareaRef.current.focus(), []);
@@ -22,4 +22,4 @@ export default function OpenAnswer({ handleSelectAnswer, handleSubmitAnswer, ans
       ></textarea>
     </div>
   );
-}
+};
