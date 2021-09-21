@@ -37,7 +37,7 @@ const questions = {
   },
 };
 
-export default function VideoQuestionary() {
+export const VideoQuestionary = () => {
   return (
     <div style={{ maxWidth: "815px" }}>
       <VideoWithQuestions
@@ -46,4 +46,4 @@ export default function VideoQuestionary() {
       />
     </div>
   );
-}
+};

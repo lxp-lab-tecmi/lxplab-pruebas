@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useMouseAndTouch } from "../../Context/MouseAndTouchContext";
+import { useMouseAndTouch } from "../Context/MouseAndTouchContext";
 import {
   useVideoRef,
   useVideoPlaying,
@@ -7,9 +7,9 @@ import {
   useVideoDuration,
   useVideoPlayingUpdate,
   useVideoFractionUpdate,
-} from "../../Context/VideoContext";
+} from "../Context/VideoContext";
 
-export default function RangeSeekInput({ questionary, displayingQuestion }) {
+export const RangeSeekInput = ({ questionary, displayingQuestion }) => {
   const playing = useVideoPlaying();
   const videoFraction = useVideoFraction();
   const videoDuration = useVideoDuration();
@@ -92,4 +92,4 @@ export default function RangeSeekInput({ questionary, displayingQuestion }) {
       </div>
     </div>
   );
-}
+};

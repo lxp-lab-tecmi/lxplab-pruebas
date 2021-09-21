@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useVideoDuration, useVideoPlayedSeconds } from "../../Context/VideoContext";
+import { useVideoDuration, useVideoPlayedSeconds } from "../Context/VideoContext";
 
-export default function VideoTimeStamp() {
+export const VideoTimeStamp = () => {
   const videoDuration = useVideoDuration();
   const playedSeconds = useVideoPlayedSeconds();
 
@@ -20,4 +20,4 @@ export default function VideoTimeStamp() {
   const parsedPlayedSeconds = parseSeconds(playedSeconds);
 
   return <p className="time-stamp">{parsedPlayedSeconds + " / " + parsedVideoDuration}</p>;
-}
+};

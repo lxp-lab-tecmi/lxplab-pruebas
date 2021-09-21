@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function OptionForQuestion({ index, text, handleSelectAnswer, checked, abcIndexing = true }) {
+export const OptionForQuestion = ({ index, text, handleSelectAnswer, checked, abcIndexing = true }) => {
   const getLetterIndex = (index) => "ABCDEFGHIJKLMNPQRSTUVWXYZ"[index];
 
   return (
@@ -11,4 +11,4 @@ export default function OptionForQuestion({ index, text, handleSelectAnswer, che
       <div className="questionText">{text}</div>
     </div>
   );
-}
+};
