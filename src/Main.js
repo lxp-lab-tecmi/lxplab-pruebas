@@ -9,6 +9,7 @@ export const Main = () => {
   const pathsToDraw = [
     { path: "/", title: "Inicio" },
     { path: "/videowithquestions", title: "Video cuestionario" },
+    { path: "/plantilla2", title: "Plantilla 2" },
   ];
 
   return (

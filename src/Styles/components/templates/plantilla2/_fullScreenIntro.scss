@@ -1,0 +1,36 @@
+.full-screen {
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+
+  div {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+
+    .title {
+      width: 40%;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-shadow: 0px 2px 27px rgba(0, 0, 0, 0.67);
+      font-size: 48px;
+      font-weight: 700;
+      font-style: normal;
+      font-family: "Jost", serif;
+      line-height: 1.2;
+      letter-spacing: 0px;
+    }
+
+    .subtitle {
+      width: 70%;
+      color: #ffffff;
+      font-size: 24px;
+      padding-top: 3%;
+      font-weight: 400;
+      font-style: normal;
+      font-family: "Open Sans", sans-serif;
+      line-height: 1.2;
+      letter-spacing: 0px;
+    }
+  }
+}
