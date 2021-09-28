@@ -13,45 +13,39 @@ export const DragAndDrop = () => {
                     ? (
                         (loading)
                             ? <h1>Loading...</h1>
-                            : <>
-                                <DragDropContext>
-                                    <Droppable droppableId="characters">
-                                        {(provided) => (
-                                            <div className="" {...provided.droppableProps} ref={provided.innerRef}>
-                                                {data.results.map((data, index) => (
-                                                    <Draggable  draggableId={data.name} index={index} key={index}>
-                                                        {(provided) => (
-                                                            <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={Date.now()}>
-                                                                {data.name}
-                                                            </li>
-                                                        )}
-                                                    </Draggable>
-                                                )
-                                                )}
-                                                {provided.placeholder}
-                                            </div>
-                                        )}
-                                    </Droppable>
-                                    <Droppable droppableId="characters">
-                                        {(provided) => (
-                                            <div className="" {...provided.droppableProps} ref={provided.innerRef}>
-                                                {data.results.map((data, index) => (
-                                                    <Draggable  draggableId={data.name} index={index} key={index}>
-                                                        {(provided) => (
-                                                            <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={Date.now()}>
-                                                                {data.name} 1
-                                                            </li>
-                                                        )}
-                                                    </Draggable>
-                                                )
-                                                )}
-                                                {provided.placeholder}
-                                            </div>
-                                        )}
-                                    </Droppable>
-                                </DragDropContext>
+                            : <DragDropContext >
+                                <div className="d-flex">
+                                    <div className="m-3">
+                                        <Droppable droppableId="characters">
+                                            {(provided) => (
+                                                <div className="" {...provided.droppableProps} ref={provided.innerRef}>
+                                                    {data.results.map((data, index) => (
+                                                        <Draggable draggableId={data.name} index={index} key={index}>
+                                                            {(provided) => (
+                                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={Date.now()}>
+                                                                    {data.name}
+                                                                </li>
+                                                            )}
+                                                        </Draggable>
+                                                    )
+                                                    )}
+                                                    {provided.placeholder}
+                                                </div>
+                                            )}
+                                        </Droppable>
+                                    </div>
+                                    <div className="m-3 bg-danger">
+                                        <Droppable droppableId="characters2">
+                                            {(provided) => (
+                                                <div className="" {...provided.droppableProps} ref={provided.innerRef}>
+                                                    {provided.placeholder}
+                                                </div>
+                                            )}
+                                        </Droppable>
+                                    </div>
+                                </div>
+                            </DragDropContext>
 
-                            </>
                     )
                     : <h1>Error al obtener información</h1>
             }
