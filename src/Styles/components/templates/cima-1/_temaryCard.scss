@@ -76,6 +76,7 @@
             margin-left: 56px;
 
             .book{
+                background-image: url('../../../../assets/Book.svg');
                 width: 15px;
                 height: 13px;
                 display: inline-block;
@@ -83,8 +84,18 @@
                 background-position: center;
                 background-size: cover;
             }
-        }
 
+            .video{
+                background-image: url('../../../../assets/Video.svg');
+                width: 16px;
+                height: 13px;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+            
+        }
         
     }
 }
