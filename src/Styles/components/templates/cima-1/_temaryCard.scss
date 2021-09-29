@@ -3,9 +3,9 @@
     margin: 0 auto;
     margin-bottom: 40px;
     height: auto;
-    background-color: #e8e8e8;
+    background-color: #E8E8E8;
     border-radius: 8px;
-    box-shadow: 4px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 5px 15px rgb(0 0 0 / 20%);
 
     .main-temario--container-top {
         display: flex;
@@ -22,7 +22,7 @@
         img {
             width: 160px;
             margin-left: 14px;
-            height: 138px;
+            height: 118px;
         }
 
         div {
@@ -62,7 +62,8 @@
     .main-temario--container-bottom{
         display: flex;
         position: relative;
-        padding-bottom: 15px;
+        margin-top: 10px;
+        padding-bottom: 8px;
 
         .time{
             font-family: 'DM Sans', sans-serif;
@@ -89,12 +90,57 @@
                 background-image: url('../../../../assets/Video.svg');
                 width: 16px;
                 height: 13px;
+                margin: 0 2.5px;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+
+            .microphone{
+                background-image: url('../../../../assets/microphone.svg');
+                width: 13px;
+                height: 13px;
+                margin: 0 2.5px;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+
+            .checklist{
+                background-image: url('../../../../assets/Circul-check.svg');
+                width: 13px;
+                height: 13px;
                 display: inline-block;
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
             }
             
+        }
+
+        .circle-link{
+            height: 45px;
+            width: 45px;
+            background-color: #727272;
+            border-radius: 27px;
+            position: absolute;
+            right: 22px;
+            top: -10px;
+            box-shadow: 4px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: ease 300ms;
+
+            .start-topic{
+                background-image: url('../../../../assets/whiteArrowx3.png');
+                width: 28px;
+                height: 25px;
+                margin: 9px 9px;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
         }
         
     }

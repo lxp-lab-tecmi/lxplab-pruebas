@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 
@@ -20,7 +21,7 @@ export const TemaryCard = ({topic}) => {
                         <span className="microphone"></span>
                         <span className="checklist"></span>
                     </div>
-                    {/*<a href=""><span class="start-topic"></span></a>*/}
+                    <Link className="circle-link" href=""><span className="start-topic"></span></Link>
                 </section>
         </article>
     )
