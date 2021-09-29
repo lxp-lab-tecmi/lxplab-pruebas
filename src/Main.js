@@ -15,9 +15,7 @@ export const Main = () => {
   return (
     <BrowserRouter>
       <Navbar paths={pathsToDraw} />
-      <React.Fragment>
-        <AppRouter />
-      </React.Fragment>
+      <AppRouter />
     </BrowserRouter>
   );
 };
