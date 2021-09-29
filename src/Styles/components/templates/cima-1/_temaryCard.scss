@@ -12,7 +12,6 @@
         padding-top: 25px;
         padding-bottom: 15px;
         position: relative;
-
         padding-top: 35px;
         width: 100%;
         height: auto;
@@ -31,6 +30,7 @@
             left: 178px;
 
             .tema-number {
+                font-family: 'DM Sans', sans-serif;
                 font-size: 16pt;
                 line-height: 19.2pt;
                 font-weight: normal;
@@ -38,6 +38,7 @@
             }
 
             .tema-name {
+                font-family: 'DM Sans', sans-serif;
                 font-size: 17pt;
                 line-height: 20.4pt;
                 font-style: italic;
@@ -47,6 +48,7 @@
             }
 
             .tema-description {
+                font-family: 'DM Sans', sans-serif;
                 font-size: 9pt;
                 line-height: 8.81pt;
                 font-weight: normal;
@@ -63,6 +65,7 @@
         padding-bottom: 15px;
 
         .time{
+            font-family: 'DM Sans', sans-serif;
             font-size: 10pt;
             line-height: 12pt;
             font-weight: normal;

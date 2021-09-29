@@ -8,7 +8,6 @@ export const TemaryCard = ({topic}) => {
             <section class="main-temario--container-top">
                 <img src={topic.image} alt="" />
                 <div>
-                <p class ="tema-number">Tema {topic.notopic}</p>
                 <h3 class ="tema-name">{topic.title}</h3>
                 <p class ="tema-description">{topic.description} </p>
                 </div>
