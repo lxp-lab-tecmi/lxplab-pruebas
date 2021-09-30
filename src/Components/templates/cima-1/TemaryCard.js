@@ -21,7 +21,7 @@ export const TemaryCard = ({topic}) => {
                         <span className="microphone"></span>
                         <span className="checklist"></span>
                     </div>
-                    <Link className="circle-link" href=""><span className="start-topic"></span></Link>
+                    <Link className="circle-link" to="/"><span className="start-topic"></span></Link>
                 </section>
         </article>
     )
