@@ -39,7 +39,7 @@ const dataTemaries = [{
 export const Temary = () => {
     return (
         <div className="temary__container">
-            <h2>temario</h2>
+            <h2 className="h2s">temario</h2>
             {dataTemaries.map(data => (
                 <TemaryCard topic={data}/>
             ))}
