@@ -29,7 +29,7 @@ const questions = {
     ],
   },
 
-  [4 * 60 * 1000 * 0.1]: {
+  [4 * 60 * 1000]: {
     question: "Ejemplo pregunta abierta.",
     question_type: "open",
     correct_answers: ["comida", "alimento"], // They are not case-sensitive, so "COMIDA" === "comida"

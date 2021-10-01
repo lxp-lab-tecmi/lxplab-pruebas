@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 
 import { BottomBar } from "./BottomBar";
-import { useMouseAndTouch } from "../Context/MouseAndTouchContext";
-import { ClosedAnswers } from "./ClosedAnswers";
 import { OpenAnswer } from "./OpenAnswer";
+import { ClosedAnswers } from "./ClosedAnswers";
+import { useMouseAndTouch } from "../Context/MouseAndTouchContext";
 
 export const VideoQuestionary = ({
   time,

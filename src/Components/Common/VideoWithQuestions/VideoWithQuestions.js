@@ -15,6 +15,7 @@ import { VideoQuestionary } from "./VideoQuestionary/VideoQuestionary";
 import { VideoControls } from "./VideoControls/VideoControls";
 import React, { useState, useRef, useEffect } from "react";
 import ReactPlayer from "react-player";
+import { VideoResults } from "./VideoResults/VideoResults";
 
 export const VideoWithQuestions = ({ url, questions }) => {
   const playing = useVideoPlaying();
@@ -89,7 +90,7 @@ export const VideoWithQuestions = ({ url, questions }) => {
     }
   };
 
-  const togglePlaying = () => setPlaying((prevPlaying) => !prevPlaying);
+  const togglePlaying = () => setPlaying((prevPlaying) => (videoFraction !== 1 ? !prevPlaying : false));
 
   function seekVideo(secondsToSeek) {
     setVideoFraction((prevFraction) => {
@@ -152,8 +153,17 @@ export const VideoWithQuestions = ({ url, questions }) => {
           onDuration={setVideoDuration}
           onProgress={handleOnProgress}
           onEnded={() => setPlaying(false)}
-          onEnablePIP={(a) => console.log("play: " + a)}
         />
+
+        {videoFraction !== 1 ? null : (
+          <VideoResults
+            questionary={questionary}
+            handleRepeatVideo={() => {
+              setVideoFraction(0);
+              setPlaying(true);
+            }}
+          />
+        )}
 
         <VideoControls
           questionary={questionary}
