@@ -14,8 +14,12 @@ import isItTimeToShowQuestion from "./VideoQuestionary/isItTimeToShowQuestion";
 import { VideoQuestionary } from "./VideoQuestionary/VideoQuestionary";
 import { VideoControls } from "./VideoControls/VideoControls";
 import React, { useState, useRef, useEffect } from "react";
-import ReactPlayer from "react-player";
 import { VideoResults } from "./VideoResults/VideoResults";
+import ReactPlayer from "react-player";
+import { nanoid } from "nanoid";
+import axios from "axios";
+
+const API_URL = "https://video-api.josefabio.com";
 
 export const VideoWithQuestions = ({ url, questions }) => {
   const playing = useVideoPlaying();
@@ -35,6 +39,8 @@ export const VideoWithQuestions = ({ url, questions }) => {
       return newQuestions;
     })({})
   );
+
+  const [userID] = useState(nanoid());
 
   const videoRef = useVideoRef();
   const videoHolderRef = useRef();
@@ -65,6 +71,7 @@ export const VideoWithQuestions = ({ url, questions }) => {
     if (displayQuestion) return; // Don't handle keys when a question is being displayed
 
     switch (a.key) {
+      case "k":
       case " ":
         togglePlaying();
         break;
@@ -100,6 +107,7 @@ export const VideoWithQuestions = ({ url, questions }) => {
         return a >= 1 ? 1 : a <= 0 ? 0 : a; // Check that the fraction stays between 0 and 1
       })();
 
+      if (newFraction === 1) setPlaying(false);
       videoRef.current.seekTo(newFraction, "fraction");
       return newFraction;
     });
@@ -113,13 +121,19 @@ export const VideoWithQuestions = ({ url, questions }) => {
   }
 
   function handleSubmitAnswer(answer, time) {
+    axios
+      .post(`${API_URL}/respuesta/${userID}`, {
+        tiempo: +time,
+        respuesta: answer + "",
+        esCorrecta: questionary[time].correct_answers.map((a) => a.toUpperCase()).includes(answer.toUpperCase()),
+      })
+      .catch((e) => console.log(e));
+
     // Add the answer to the state
-    setQuestionary((prevQuestionary) => {
-      return {
-        ...prevQuestionary,
-        [time]: { ...prevQuestionary[time], answered: answer },
-      };
-    });
+    setQuestionary((prevQuestionary) => ({
+      ...prevQuestionary,
+      [time]: { ...prevQuestionary[time], answered: answer },
+    }));
     // Play the video again
     setPlaying(true);
   }
@@ -152,10 +166,13 @@ export const VideoWithQuestions = ({ url, questions }) => {
           className="react-player"
           onDuration={setVideoDuration}
           onProgress={handleOnProgress}
-          onEnded={() => setPlaying(false)}
+          onEnded={() => {
+            axios.post(`${API_URL}/termino/${userID}`).catch((e) => console.log(e));
+            setPlaying(false);
+          }}
         />
 
-        {videoFraction !== 1 ? null : (
+        {videoFraction === 1 ? (
           <VideoResults
             questionary={questionary}
             handleRepeatVideo={() => {
@@ -169,7 +186,7 @@ export const VideoWithQuestions = ({ url, questions }) => {
               });
             }}
           />
-        )}
+        ) : null}
 
         <VideoControls
           questionary={questionary}
