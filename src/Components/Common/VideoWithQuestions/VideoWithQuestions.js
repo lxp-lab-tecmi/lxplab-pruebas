@@ -161,6 +161,12 @@ export const VideoWithQuestions = ({ url, questions }) => {
             handleRepeatVideo={() => {
               setVideoFraction(0);
               setPlaying(true);
+              setQuestionary((prev) => {
+                const tempPrev = { ...prev };
+                const times = Object.keys(tempPrev);
+                for (let time of times) delete tempPrev[time].answered;
+                return tempPrev;
+              });
             }}
           />
         )}

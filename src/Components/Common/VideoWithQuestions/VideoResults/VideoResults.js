@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
-import { Button } from "react-bootstrap";
 import ICONS from "../../../../Utils/icons";
+import { Button } from "react-bootstrap";
 
 export const VideoResults = ({ questionary, handleRepeatVideo }) => {
   const [punctuation, setPunctuation] = useState(0);
