@@ -1,7 +1,10 @@
 import React from 'react'
 import { ExpertsData } from './ExpertsData'
+import { Link } from 'react-router-dom'
+
 
 import img from '../../../assets/Group 39x2.jpg'
+import { Carousel } from 'react-bootstrap'
 
 const dataExperts = [{
     images:img,
@@ -26,9 +29,14 @@ export const Experts = () => {
     return (
         <div>
             <h2 className='h2s'>Expertos</h2>
+            <Carousel>
             {dataExperts.map(inf => (
-                <ExpertsData expert={inf}/>
-            ))}   
+                <Carousel.Item>
+                    <ExpertsData expert={inf}/>
+                </Carousel.Item>
+            ))}
+            </Carousel>   
+            <Link className="hero-next" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Comenzar <span></span></Link>
         </div>
     )
 }

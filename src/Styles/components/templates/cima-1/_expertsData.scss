@@ -1,0 +1,46 @@
+.footer-experts{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    margin-bottom: 37px;
+    .footer-experts--information{
+        gap: 10px;
+        display: flex;
+
+        img{
+            width: 124px;
+            height: 124px;
+            border-radius: 80px;
+        }
+
+        h3{
+            font-family: 'DM Sans', sans-serif;
+            font-weight: normal;
+            font-size: 12.47pt;
+            line-height: 14.96pt;
+            text-align: left;
+        }
+
+        .subtitle{
+            font-family: 'DM Sans', sans-serif;
+            font-weight: normal;
+            font-size: 8.21pt;
+            line-height: 9.85pt;
+            text-align: left;
+        }
+
+        .expert-info{
+            font-family: 'DM Sans', sans-serif;
+            width: 196.58px;
+            height: auto;
+            margin: 0 auto;
+            margin-top: 5px;
+            font-weight: normal;
+            font-size: 9.25pt;
+            line-height: 11.1pt;
+            text-align: left;
+        }
+    }
+}
