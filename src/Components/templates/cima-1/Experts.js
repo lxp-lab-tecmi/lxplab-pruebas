@@ -4,23 +4,31 @@ import { ExpertsData } from './ExpertsData'
 import img from '../../../assets/Group 39x2.jpg'
 
 const dataExperts = [{
-    image:img,
-    name: 'Ines Galvan'
+    images:img,
+    name: 'Ines Galvan',
+    carreer:'Diseñadora Grafica',
+    dataExpert:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, qui.'
 },
 {
-    image:img
+    images:img,
+    name: 'Maria Ortiz',
+    carreer:'Contadora',
+    dataExpert:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, qui.'
 },
 {
-    image:img
+    images:img,
+    name: 'Carmen Avilez',
+    carreer:'Arquitecta',
+    dataExpert:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, qui.'
 }]
 
 export const Experts = () => {
     return (
-        <>
-            <h2 className>Expertos</h2>
-            {dataExperts.map(data => (
-                <ExpertsData topic={data} />
+        <div>
+            <h2 className='h2s'>Expertos</h2>
+            {dataExperts.map(inf => (
+                <ExpertsData expert={inf}/>
             ))}   
-        </>
+        </div>
     )
 }

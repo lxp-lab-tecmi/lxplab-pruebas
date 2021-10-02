@@ -10,6 +10,7 @@ export default function IndexScreen() {
   const pathsToDraw = [
     { path: "/", title: "Inicio" },
     { path: "/videowithquestions", title: "Video cuestionario" },
+    { path: "/template-cima1", title: "Cima Plantilla 1" },
   ];
   
   return (
