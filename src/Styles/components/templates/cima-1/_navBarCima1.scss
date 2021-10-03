@@ -29,7 +29,32 @@
 
         .header-simbles{
             margin-top: 8px;
-            position: relative;   
+            position: relative; 
+            
+            .img-hamburguer{
+                
+                .hamburguer{
+                    display: inline-block;
+                    position: absolute;
+                    left: 43px;
+                    min-width: 20.7px;
+                    height: 30.7px;
+                    cursor: pointer;
+                    top: 0px;
+                    z-index: 10;
+                }
+            }
+
+            .img-profile{
+                
+                .profile{
+                    display: inline-block;
+                    margin-right: 35px;
+                    min-width: 30.7px;
+                    height: 30.7px;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import blackLogo from '../../../assets/black-logo.svg'
+import profile from '../../../assets/profile.svg'
+import hamburguer from '../../../assets/hamburguer-menu.svg'
 
 export const NavBarCima1 = () => {
     return (
@@ -10,9 +12,11 @@ export const NavBarCima1 = () => {
                         <img src={blackLogo} alt="" />
                     </div>
                     <div className="header-simbles" id="header-simbles">
-                        <span className="profile"></span>
-                        <div className="img-hamburguer" id="img-js">
-                            <img className="hamburguer" src="./assets/hamburguer-menu.svg" alt="" />
+                        <div className="img-profile">
+                            <img className="profile" src={profile} alt="" />
+                        </div>
+                        <div className="img-hamburguer">
+                            <img className="hamburguer" src={hamburguer} alt="" />
                         </div>
                     </div>
                 </div>
