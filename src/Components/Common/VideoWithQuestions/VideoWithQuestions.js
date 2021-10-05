@@ -121,13 +121,14 @@ export const VideoWithQuestions = ({ url, questions }) => {
   }
 
   function handleSubmitAnswer(answer, time) {
-    axios
-      .post(`${API_URL}/respuesta/${userID}`, {
-        tiempo: +time,
-        respuesta: answer + "",
-        esCorrecta: questionary[time].correct_answers.map((a) => a.toUpperCase()).includes(answer.toUpperCase()),
-      })
-      .catch((e) => console.log(e));
+    if (questionary[time].question_type !== "annotation")
+      axios
+        .post(`${API_URL}/respuesta/${userID}`, {
+          tiempo: +time,
+          respuesta: answer + "",
+          esCorrecta: questionary[time].correct_answers.map((a) => a.toUpperCase()).includes(answer.toUpperCase()),
+        })
+        .catch((e) => console.log(e));
 
     // Add the answer to the state
     setQuestionary((prevQuestionary) => ({
@@ -200,7 +201,7 @@ export const VideoWithQuestions = ({ url, questions }) => {
           handleGoBack={() => handleGoBack(5)}
           handleSubmitAnswer={handleSubmitAnswer}
           questionData={questionary[displayQuestion]}
-          totalQuestions={Object.keys(questionary).length}
+          totalQuestions={Object.values(questionary).filter(({ question_type: t }) => t !== "annotation").length}
         />
       </div>
     </MouseAndTouchProvider>

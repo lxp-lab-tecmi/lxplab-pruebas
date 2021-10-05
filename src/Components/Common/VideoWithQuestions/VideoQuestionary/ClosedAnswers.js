@@ -13,7 +13,7 @@ export const ClosedAnswers = ({
   const shuffledAnswers = useMemo(
     () => shuffleArray([...incorrect_answers, ...correct_answers]), //
     [incorrect_answers, correct_answers]
-  ); // eslint-disable-line react-hooks/exhaustive-deps
+  );
 
   const optionsForQuestion = shuffledAnswers.map((option, index) => {
     return (

@@ -10,6 +10,7 @@ export const VideoResults = ({ questionary, handleRepeatVideo }) => {
     for (const value of values) {
       if (
         value.answered &&
+        value.correct_answers &&
         value.correct_answers.map((a) => a.toUpperCase()).includes(value.answered.toUpperCase())
       )
         punctuation++;
@@ -17,7 +18,7 @@ export const VideoResults = ({ questionary, handleRepeatVideo }) => {
     setPunctuation(punctuation);
   }, [questionary]);
 
-  const numberOfQuestions = Object.keys(questionary).length;
+  const numberOfQuestions = Object.values(questionary).filter(({ question_type: t }) => t !== "annotation").length;
   return (
     <React.Fragment>
       <div className="video-questionary">
