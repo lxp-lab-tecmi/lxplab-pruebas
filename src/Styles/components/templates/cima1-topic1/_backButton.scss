@@ -1,0 +1,22 @@
+.backbutton{
+    height: 35px;
+    width: 35px;
+    background-color: #727272;
+    border-radius: 27px;
+    position: absolute;
+    right: 38px;
+    top: 60px;
+    box-shadow: 4px 5px 15px rgb(0 0 0 / 20%);
+    transition: ease 300ms;
+
+    span{
+        background-image: url('../../../../assets/whiteArrowBackx3.png');
+        width: 20px;
+        height: 18px;
+        margin: 8px 7px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}
