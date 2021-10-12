@@ -1,5 +1,5 @@
 .topic1-title{
-    min-width: 360px;
+    min-width: 320px;
     margin: 0 40px;
     margin-top: 50px;
 
@@ -27,7 +27,7 @@
 
     .title-t1-bottom{
         display: flex;
-        position: fixed;
+        position: absolute;
 
         .t1-heart{
             background-image: url('../../../../assets/heart.svg');
