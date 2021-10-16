@@ -18,7 +18,7 @@ export const OpenAnswer = ({ handleSelectAnswer, handleSubmitAnswer, answer }) =
         onKeyDown={handleKeyDown}
         value={answer === null ? "" : answer}
         placeholder="Toca aquí para empezar a escribir..."
-        onInput={({ target }) => handleSelectAnswer(target.value, "open")}
+        onInput={({ target }) => handleSelectAnswer(target.value)}
       ></textarea>
     </div>
   );

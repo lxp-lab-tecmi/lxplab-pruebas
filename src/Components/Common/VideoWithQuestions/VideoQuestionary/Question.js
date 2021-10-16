@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { BottomBar } from "./BottomBar";
 import { OpenAnswer } from "./OpenAnswer";
 import { ClosedAnswers } from "./ClosedAnswers";
@@ -6,80 +6,91 @@ import { HeaderOfQuestion } from "./HeaderOfQuestion";
 
 export const Question = ({
   time,
-  questionData,
   handleGoBack,
+  questionsData,
   canUseButtons,
   totalQuestions,
   setCanUseButtons,
   handleSubmitAnswer,
 }) => {
-  const { question, correct_answers, incorrect_answers, question_type } = questionData || {
-    ...{ correct_answers: [], incorrect_answers: [] },
-    ...{ question: null, question_type: null },
-  };
-
+  const questionsToShow = [];
   const optionsDivRef = useRef();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useEffect(() => setSelectedOptions(new Array(questionsData.length).fill(null)), [questionsData]);
+
+  for (let i = 0; i < questionsData.length; i++) {
+    const { question, answers, question_type, index } = questionsData[i];
+
+    const handleSelectAnswer = (option) => {
+      switch (question_type) {
+        case "closed":
+        case "boolean":
+          return setSelectedOptions((prevOptions) => {
+            const copy = [...prevOptions];
+            copy[i] = option === prevOptions[i] ? null : option;
+            return copy;
+          });
+
+        case "open":
+          return setSelectedOptions((prevOptions) => {
+            const copy = [...prevOptions];
+            copy[i] = option.trim() === "" ? null : option;
+            return copy;
+          });
+
+        default:
+      }
+    };
+
+    questionsToShow.push(
+      <React.Fragment key={index}>
+        <HeaderOfQuestion question={question} questionNumber={index + 1} totalQuestions={totalQuestions} />
+
+        {(() => {
+          switch (question_type) {
+            case "closed":
+            case "boolean":
+              return (
+                <ClosedAnswers
+                  answers={answers}
+                  optionsDivRef={optionsDivRef}
+                  selectedOption={selectedOptions[i]}
+                  handleSelectAnswer={handleSelectAnswer}
+                />
+              );
+
+            case "open":
+              return (
+                <OpenAnswer
+                  answer={selectedOptions[i]}
+                  handleSelectAnswer={handleSelectAnswer}
+                  handleSubmitAnswer={handleSubmitAnswerAndReset}
+                />
+              );
+
+            default:
+              return null;
+          }
+        })()}
+      </React.Fragment>
+    );
+  }
 
   const doesOptionsHaveScrollBar = optionsDivRef.current?.scrollHeight > optionsDivRef.current?.clientHeight;
-  const handleSelectAnswer = (option, question_type) => {
-    switch (question_type) {
-      case "closed":
-      case "boolean":
-        return setSelectedOption((prevOption) => (option === prevOption ? null : option));
-
-      case "open":
-        return setSelectedOption(option.trim() === "" ? null : option);
-
-      default:
-    }
-  };
-
-  const resetValues = () => setSelectedOption(null) & setCanUseButtons(false);
-  const handleSubmitAnswerAndReset = () => handleSubmitAnswer(selectedOption.trim(), time) & resetValues();
+  const resetValues = () => setSelectedOptions([]) & setCanUseButtons(false);
+  const handleSubmitAnswerAndReset = () => handleSubmitAnswer(selectedOptions, time) & resetValues();
 
   return (
-    <React.Fragment>
-      <HeaderOfQuestion
-        totalQuestions={totalQuestions}
-        questionNumber={questionData.index + 1}
-        question={question}
-      />
-
-      {(() => {
-        switch (question_type) {
-          case "closed":
-          case "boolean":
-            return (
-              <ClosedAnswers
-                optionsDivRef={optionsDivRef}
-                selectedOption={selectedOption}
-                correct_answers={correct_answers}
-                incorrect_answers={incorrect_answers}
-                handleSelectAnswer={handleSelectAnswer}
-              />
-            );
-
-          case "open":
-            return (
-              <OpenAnswer
-                answer={selectedOption}
-                handleSelectAnswer={handleSelectAnswer}
-                handleSubmitAnswer={handleSubmitAnswerAndReset}
-              />
-            );
-
-          default:
-            return null;
-        }
-      })()}
+    <>
+      <div className="questions-div">{questionsToShow}</div>
 
       <BottomBar
-        selectedOption={selectedOption}
+        selectedOptions={selectedOptions}
         handleSubmitAnswer={handleSubmitAnswerAndReset}
         doesOptionsHaveScrollBar={doesOptionsHaveScrollBar}
         handleGoBack={canUseButtons ? () => handleGoBack() & resetValues() : () => {}}
       />
-    </React.Fragment>
+    </>
   );
 };

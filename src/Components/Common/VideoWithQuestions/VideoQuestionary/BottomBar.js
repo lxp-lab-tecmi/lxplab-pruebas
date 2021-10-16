@@ -5,10 +5,12 @@ import ICONS from "../../../../Utils/icons";
 export const BottomBar = ({
   okButton = "Responder",
   handleGoBack,
-  selectedOption,
+  selectedOptions,
   handleSubmitAnswer,
   doesOptionsHaveScrollBar,
 }) => {
+  const disable = !selectedOptions ? false : selectedOptions.filter((a) => a === null).length !== 0;
+
   return (
     <div
       className="bottom-bar-holder"
@@ -23,11 +25,7 @@ export const BottomBar = ({
           &thinsp;Volver atrás
         </button>
 
-        <button
-          disabled={selectedOption === null}
-          className={selectedOption === null ? "disabled" : ""}
-          onClick={() => handleSubmitAnswer()}
-        >
+        <button disabled={disable} className={disable ? "disabled" : ""} onClick={() => handleSubmitAnswer()}>
           {okButton}
           {ICONS.chevronRight(20, 20)}
         </button>

@@ -2,17 +2,11 @@ import React, { useMemo } from "react";
 import { OptionForQuestion } from "./OptionForQuestion";
 import shuffleArray from "../../../../Utils/shuffleArray";
 
-export const ClosedAnswers = ({
-  optionsDivRef,
-  selectedOption,
-  correct_answers,
-  incorrect_answers,
-  handleSelectAnswer,
-}) => {
+export const ClosedAnswers = ({ answers, optionsDivRef, selectedOption, handleSelectAnswer }) => {
   // Only shuffle the array whet is needed, not on every frame
   const shuffledAnswers = useMemo(
-    () => shuffleArray([...incorrect_answers, ...correct_answers]), //
-    [incorrect_answers, correct_answers]
+    () => shuffleArray([...answers]), //
+    [answers]
   );
 
   const optionsForQuestion = shuffledAnswers.map((option, index) => {
@@ -22,7 +16,7 @@ export const ClosedAnswers = ({
         text={option}
         index={index}
         checked={selectedOption === option}
-        handleSelectAnswer={() => handleSelectAnswer(option, "closed")}
+        handleSelectAnswer={() => handleSelectAnswer(option)}
       />
     );
   });

@@ -8,7 +8,7 @@ export const VideoQuestionary = ({
   time,
   display,
   handleGoBack,
-  questionData,
+  questionsData,
   totalQuestions,
   handleSubmitAnswer,
 }) => {
@@ -21,22 +21,24 @@ export const VideoQuestionary = ({
   // If it can't use the buttons but the mouse is not clicked, then you can use them
   if (!canUseButtons && !mouseAndTouchState.clicked) setTimeout(() => setCanUseButtons(true), 100);
 
+  const isAnnotation = questionsData.filter(({ question_type: t }) => t === "annotation").length > 0;
+
   return (
     <div className="video-questionary noselect">
       <div className="question-with-options">
-        {/* Check if the question is an annotation in reality */}
-        {questionData.question_type === "annotation" ? (
+        {/* Check if the question is an annotation */}
+        {isAnnotation ? (
           <Annotation
-            questionData={questionData}
             handleGoBack={handleGoBack}
             canUseButtons={canUseButtons}
+            annotationData={questionsData[0]}
             setCanUseButtons={setCanUseButtons}
-            handleSubmitAnswer={() => handleSubmitAnswer(true, time)}
+            handleSubmitAnswer={() => handleSubmitAnswer([true], time)}
           />
         ) : (
           <Question
             time={time}
-            questionData={questionData}
+            questionsData={questionsData}
             handleGoBack={handleGoBack}
             canUseButtons={canUseButtons}
             totalQuestions={totalQuestions}

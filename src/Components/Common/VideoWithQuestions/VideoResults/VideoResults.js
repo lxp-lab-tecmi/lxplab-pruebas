@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from "react";
 import ICONS from "../../../../Utils/icons";
 import { Button } from "react-bootstrap";
+import countQuestions from "../countQuestions";
 
-export const VideoResults = ({ questionary, handleRepeatVideo }) => {
+export const VideoResults = ({ questions, handleRepeatVideo }) => {
   const [punctuation, setPunctuation] = useState(0);
   useMemo(() => {
-    const values = Object.values(questionary);
+    const values = Object.values(questions);
     let punctuation = 0;
     for (const value of values) {
       if (
@@ -16,9 +17,9 @@ export const VideoResults = ({ questionary, handleRepeatVideo }) => {
         punctuation++;
     }
     setPunctuation(punctuation);
-  }, [questionary]);
+  }, [questions]);
 
-  const numberOfQuestions = Object.values(questionary).filter(({ question_type: t }) => t !== "annotation").length;
+  const numberOfQuestions = countQuestions(questions);
   return (
     <React.Fragment>
       <div className="video-questionary">
