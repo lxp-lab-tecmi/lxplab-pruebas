@@ -4,6 +4,7 @@ import { BackButton } from './BackButton'
 import { DescriptT1 } from './DescriptT1'
 import { ImageTopic1 } from './ImageTopic1'
 import { TitleTopic1 } from './TitleTopic1'
+import { CarrouselT1 } from './CarrouselT1'
 
 export const Topic1Screen = () => {
     return (
@@ -13,6 +14,7 @@ export const Topic1Screen = () => {
             <TitleTopic1 />
             <ImageTopic1 />
             <DescriptT1 />
+            <CarrouselT1 />
         </div>
     )
 }

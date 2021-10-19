@@ -1,5 +1,4 @@
 import React from 'react'
-import image from '../../../assets/Group2x2.jpg'
 
 export const ImageTopic1 = () => {
     return (
