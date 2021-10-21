@@ -17,7 +17,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { VideoResults } from "./VideoResults/VideoResults";
 import { VideoPlayer } from "./VideoPlayer/VideoPlayer";
 import countQuestions from "./countQuestions";
-import { nanoid } from "nanoid";
 import axios from "axios";
 
 const API_URL = "http://localhost:3000";
@@ -57,8 +56,6 @@ export const VideoWithQuestions = ({ videoID }) => {
     [videoID]
   );
 
-  const [userID] = useState(nanoid());
-
   const videoRef = useVideoRef();
   const videoHolderRef = useRef();
 
@@ -86,12 +83,12 @@ export const VideoWithQuestions = ({ videoID }) => {
   useEffect(() => {
     if (playedSeconds !== 0)
       if (displayQuestions) {
-        setPlaying(false);
         setVideoFraction(displayQuestions / 1000 / videoDuration);
         videoRef.current.seekTo(displayQuestions / 1000 / videoDuration, "fraction");
         videoHolderRef.current.blur();
+        setPlaying(false);
       } else videoHolderRef.current.focus();
-  }, [displayQuestions, playing, videoFraction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [displayQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleKey = (a) => {
     if (displayQuestions) return; // Don't handle keys when a question is being displayed
@@ -169,10 +166,9 @@ export const VideoWithQuestions = ({ videoID }) => {
     if (videoFraction !== played) setVideoFraction(played);
   }
 
-  const handleOnEnded = () => {
-    axios.post(`${API_URL}/termino/${userID}`).catch((e) => console.log(e));
+  function handleOnEnded() {
     setPlaying(false);
-  };
+  }
 
   return questions ? (
     <MouseAndTouchProvider>
@@ -189,7 +185,9 @@ export const VideoWithQuestions = ({ videoID }) => {
 
         {videoFraction === 1 ? (
           <VideoResults
-            questions={questions}
+            videoID={videoID}
+            allQuestions={questions}
+            setQuestions={setQuestions}
             handleRepeatVideo={() => {
               setVideoFraction(0);
               setPlaying(true);
