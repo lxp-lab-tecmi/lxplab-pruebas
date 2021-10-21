@@ -41,7 +41,7 @@ export const RangeSeekInput = ({ questionary, displayingQuestion }) => {
       setIsUsingIt(false);
       if (playAfterMove.current) {
         playAfterMove.current = false;
-        setPlaying(true);
+        setPlaying(videoFraction !== 1); // Play the video only if the end hasn't beet reached
       }
     }
   }, [mouseAndTouchState, isUsingIt]); // eslint-disable-line react-hooks/exhaustive-deps

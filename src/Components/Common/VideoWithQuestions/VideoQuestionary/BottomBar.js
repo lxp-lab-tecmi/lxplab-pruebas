@@ -2,7 +2,15 @@ import React from "react";
 
 import ICONS from "../../../../Utils/icons";
 
-export const BottomBar = ({ handleGoBack, selectedOption, handleSubmitAnswer, doesOptionsHaveScrollBar }) => {
+export const BottomBar = ({
+  okButton = "Responder",
+  handleGoBack,
+  selectedOptions,
+  handleSubmitAnswer,
+  doesOptionsHaveScrollBar,
+}) => {
+  const disable = !selectedOptions ? false : selectedOptions.filter((a) => a === null).length !== 0;
+
   return (
     <div
       className="bottom-bar-holder"
@@ -17,12 +25,8 @@ export const BottomBar = ({ handleGoBack, selectedOption, handleSubmitAnswer, do
           &thinsp;Volver atrás
         </button>
 
-        <button
-          disabled={selectedOption === null}
-          className={selectedOption === null ? "disabled" : ""}
-          onClick={() => handleSubmitAnswer()}
-        >
-          Responder
+        <button disabled={disable} className={disable ? "disabled" : ""} onClick={() => handleSubmitAnswer()}>
+          {okButton}
           {ICONS.chevronRight(20, 20)}
         </button>
       </div>
