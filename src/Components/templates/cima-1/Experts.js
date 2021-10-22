@@ -36,7 +36,7 @@ export const Experts = () => {
                 </Carousel.Item>
             ))}
             </Carousel>   
-            <Link className="hero-next" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Comenzar <span></span></Link>
+            <Link className="hero-next" to="/cima1-topic1">Comenzar <span></span></Link>
         </div>
     )
 }

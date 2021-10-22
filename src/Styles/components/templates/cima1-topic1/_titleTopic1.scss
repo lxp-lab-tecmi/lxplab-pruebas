@@ -1,0 +1,65 @@
+.topic1-title{
+    min-width: 317px;
+    margin: 0px 29px;
+    margin-top: 50px;
+
+    .h2t1{
+        font-family: 'DM Sans', sans-serif;
+        font-size: 18.73pt;
+        text-align: 22.58pt;
+        font-weight: normal;
+    }
+
+    .h1t1{
+        font-family: 'DM Sans', sans-serif;
+        font-size: 28.1pt;
+        text-align: 33.72pt;
+        font-weight: bold;
+    }
+
+    .pt1{
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12pt;
+        text-align: 14.4pt;
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    .title-t1-bottom{
+        display: flex;
+        position: absolute;
+
+        .t1-heart{
+            margin-left: 40px;
+            background-image: url('../../../../assets/heart.svg');
+            width: 15px;
+            height: 13px;
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .t1-time{
+            font-family: 'DM Sans', sans-serif;
+            font-size: 5.99pt;
+            text-align: 7.18pt;
+            font-weight: normal;
+            position: absolute;
+            left: 225px;
+        }
+
+        .t1-book{
+            background-image: url('../../../../assets/Book.svg');
+            width: 15px;
+            height: 13px;
+            position: absolute;
+            left: 270px;
+            top: -2px;
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    }
+}
