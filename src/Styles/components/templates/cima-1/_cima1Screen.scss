@@ -1,0 +1,19 @@
+@import "./carrousel";
+@import "./intro";
+@import "./navBarCima1";
+@import "./temary";
+@import "./temaryCard";
+@import "./moreTopics";
+@import "./expertsData";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    font-family: 'DM Sans', sans-serif;
+}

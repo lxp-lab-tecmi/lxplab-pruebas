@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
+import Navbar from "../../Components/Common/Navbar/Navbar";
 import { useHolderjs } from "use-holderjs";
-import { Navbar } from "../Common/Navbar/Navbar";
 
 export const IndexScreen = () => {
   const pathsToDraw = [
