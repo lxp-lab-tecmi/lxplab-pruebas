@@ -22,3 +22,10 @@ main {
 .pointer {
   cursor: pointer;
 }
+
+
+.background{
+  background-color: $background;
+  width: 100vw;
+  height: 100vh;
+}
