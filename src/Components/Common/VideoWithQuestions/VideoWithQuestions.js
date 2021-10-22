@@ -10,13 +10,19 @@ import {
   useVideoFractionUpdate,
 } from "./Context/VideoContext";
 
-import isItTimeToShowQuestion from "./VideoQuestionary/isItTimeToShowQuestion";
+import isItTimeToShowQuestions from "./VideoQuestionary/isItTimeToShowQuestions";
+import { VideoQuestionary } from "./VideoQuestionary/VideoQuestionary";
+import { VideoControls } from "./VideoControls/VideoControls";
 import React, { useState, useRef, useEffect } from "react";
-import VideoQuestionary from "./VideoQuestionary";
-import VideoControls from "./VideoControls";
-import ReactPlayer from "react-player";
+import { VideoResults } from "./VideoResults/VideoResults";
+import { VideoPlayer } from "./VideoPlayer/VideoPlayer";
+import countQuestions from "./countQuestions";
+import axios from "axios";
 
-export default function VideoWithQuestions({ url, questions }) {
+const API_URL = "http://localhost:3000";
+// const API_URL = "https://video-api.josefabio.com";
+
+export const VideoWithQuestions = ({ videoID }) => {
   const playing = useVideoPlaying();
   const videoDuration = useVideoDuration();
   const playedSeconds = useVideoPlayedSeconds();
@@ -26,44 +32,69 @@ export default function VideoWithQuestions({ url, questions }) {
   const setVideoFraction = useVideoFractionUpdate();
   const setVideoDuration = useVideoDurationUpdate();
 
-  const [questionary, setQuestionary] = useState(
-    ((newQuestions) => {
-      // Add the index to every question and sort them by time
-      const times = Object.keys(questions).sort((a, b) => a - b);
-      for (let i = 0; i < times.length; i++) newQuestions[times[i]] = { ...questions[times[i]], index: i };
-      return newQuestions;
-    })({})
+  const [questions, setQuestions] = useState();
+  const [url, setURL] = useState();
+  useEffect(
+    () =>
+      axios.get(`${API_URL}/videoQuestion/${videoID}`).then(({ data: { data, code, message } }) => {
+        if (code === 1) {
+          const { video_url, questions } = data;
+
+          // Add an index to each question
+          const questionsIndexed = { ...questions };
+          let i = 0;
+          for (let [key, questionsArr] of Object.entries(questions))
+            for (let j = 0; j < questionsArr.length; j++)
+              if (questionsIndexed[key][j].question_type !== "annotation") questionsIndexed[key][j].index = i++;
+
+          setQuestions(questionsIndexed);
+          setURL(video_url);
+        } else {
+          console.log("Error fetching data:", message);
+        }
+      }),
+    [videoID]
   );
 
   const videoRef = useVideoRef();
   const videoHolderRef = useRef();
 
   // At first load, focus the video player, so that the user can use keyboard to control it
-  useEffect(() => videoHolderRef.current.focus(), []);
+  useEffect(() => videoHolderRef?.current?.focus(), [videoHolderRef]);
 
-  const timesToWatchFor = Object.keys(questionary)
-    .filter((t) => questionary[t].answered === undefined) // Only select those questions which don't have an answer yet
-    .map((t) => parseInt(t));
+  const [timesToWatchFor, setTimesToWatchFor] = useState([]);
+  useEffect(() => {
+    if (questions)
+      setTimesToWatchFor(
+        Object.keys(questions)
+          .filter((t) => {
+            for (let { answered } of questions[t]) if (answered) return false;
+            return true;
+          }) // Only select those questions which don't have an answer yet
+          .map((t) => parseInt(t))
+      );
+  }, [questions]);
 
   // This const will be null if no question should be showed, or it will be equal to the time un ms
   // which is useful because is the key of the object questionary
-  const displayQuestion = isItTimeToShowQuestion({ timesToWatchFor, playedSeconds });
+  const displayQuestions = isItTimeToShowQuestions({ timesToWatchFor, playedSeconds });
 
   // Show the question if there is one
   useEffect(() => {
     if (playedSeconds !== 0)
-      if (displayQuestion) {
-        setPlaying(false);
-        setVideoFraction(displayQuestion / 1000 / videoDuration);
-        videoRef.current.seekTo(displayQuestion / 1000 / videoDuration, "fraction");
+      if (displayQuestions) {
+        setVideoFraction(displayQuestions / 1000 / videoDuration);
+        videoRef.current.seekTo(displayQuestions / 1000 / videoDuration, "fraction");
         videoHolderRef.current.blur();
+        setPlaying(false);
       } else videoHolderRef.current.focus();
-  }, [displayQuestion, playing, videoFraction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [displayQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleKey = (a) => {
-    if (displayQuestion) return; // Don't handle keys when a question is being displayed
+    if (displayQuestions) return; // Don't handle keys when a question is being displayed
 
     switch (a.key) {
+      case "k":
       case " ":
         togglePlaying();
         break;
@@ -89,7 +120,7 @@ export default function VideoWithQuestions({ url, questions }) {
     }
   };
 
-  const togglePlaying = () => setPlaying((prevPlaying) => !prevPlaying);
+  const togglePlaying = () => setPlaying((prevPlaying) => (videoFraction !== 1 ? !prevPlaying : false));
 
   function seekVideo(secondsToSeek) {
     setVideoFraction((prevFraction) => {
@@ -99,6 +130,7 @@ export default function VideoWithQuestions({ url, questions }) {
         return a >= 1 ? 1 : a <= 0 ? 0 : a; // Check that the fraction stays between 0 and 1
       })();
 
+      if (newFraction === 1) setPlaying(false);
       videoRef.current.seekTo(newFraction, "fraction");
       return newFraction;
     });
@@ -111,14 +143,14 @@ export default function VideoWithQuestions({ url, questions }) {
     videoHolderRef.current.focus();
   }
 
-  function handleSubmitAnswer(answer, time) {
+  function handleSubmitAnswer(answers, time) {
     // Add the answer to the state
-    setQuestionary((prevQuestionary) => {
-      return {
-        ...prevQuestionary,
-        [time]: { ...prevQuestionary[time], answered: answer },
-      };
+    setQuestions((prevQuestionary) => {
+      const copy = JSON.parse(JSON.stringify(prevQuestionary));
+      for (let i = 0; i < answers.length; i++) copy[time][i].answered = answers[i];
+      return copy;
     });
+
     // Play the video again
     setPlaying(true);
   }
@@ -126,7 +158,7 @@ export default function VideoWithQuestions({ url, questions }) {
   function handleOnProgress({ played }) {
     // This is in case the user manages to start playing the video again when a question is showing,
     // like using the PIP of Firefox
-    if (displayQuestion && videoFraction !== played) {
+    if (displayQuestions && videoFraction !== played) {
       setPlaying(true);
       setPlaying(false);
     }
@@ -134,42 +166,56 @@ export default function VideoWithQuestions({ url, questions }) {
     if (videoFraction !== played) setVideoFraction(played);
   }
 
-  return (
+  function handleOnEnded() {
+    setPlaying(false);
+  }
+
+  return questions ? (
     <MouseAndTouchProvider>
       <div className="videoHolder" ref={videoHolderRef} onKeyDown={handleKey} tabIndex="-1">
-        <ReactPlayer
+        <VideoPlayer
           url={url}
-          volume={1}
-          pip={false}
-          width="100%"
-          loop={false}
-          height="100%"
-          ref={videoRef}
           playing={playing}
-          playsinline={true}
-          onClick={togglePlaying}
-          className="react-player"
-          onDuration={setVideoDuration}
-          onProgress={handleOnProgress}
-          onEnded={() => setPlaying(false)}
-          onEnablePIP={(a) => console.log("play: " + a)}
+          videoRef={videoRef}
+          togglePlaying={togglePlaying}
+          handleOnEnded={handleOnEnded}
+          setVideoDuration={setVideoDuration}
+          handleOnProgress={handleOnProgress}
         />
 
+        {videoFraction === 1 ? (
+          <VideoResults
+            videoID={videoID}
+            allQuestions={questions}
+            setQuestions={setQuestions}
+            handleRepeatVideo={() => {
+              setVideoFraction(0);
+              setPlaying(true);
+              setQuestions((prev) => {
+                const tempPrev = { ...prev };
+                const times = Object.keys(tempPrev);
+                for (let time of times) delete tempPrev[time].answered;
+                return tempPrev;
+              });
+            }}
+          />
+        ) : null}
+
         <VideoControls
-          questionary={questionary}
+          questionary={questions}
           videoHolderRef={videoHolderRef}
-          displayingQuestion={Boolean(displayQuestion)}
+          displayingQuestion={Boolean(displayQuestions)}
         />
 
         <VideoQuestionary
-          time={displayQuestion}
-          display={Boolean(displayQuestion)}
+          time={displayQuestions}
+          display={Boolean(displayQuestions)}
           handleGoBack={() => handleGoBack(5)}
           handleSubmitAnswer={handleSubmitAnswer}
-          questionData={questionary[displayQuestion]}
-          totalQuestions={Object.keys(questionary).length}
+          totalQuestions={countQuestions(questions)}
+          questionsData={questions[displayQuestions]}
         />
       </div>
     </MouseAndTouchProvider>
-  );
-}
+  ) : null;
+};
