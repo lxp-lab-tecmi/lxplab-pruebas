@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { useFetch } from '../../hooks/useFetch';
+import { useFetch } from '../../Hooks/useFetch';
 
 export const DragAndDrop = () => {
     const { data, loading, error } = useFetch('https://pokeapi.co/api/v2/pokemon/')

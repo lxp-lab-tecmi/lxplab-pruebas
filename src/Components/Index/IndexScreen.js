@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import Navbar from "../../Components/Common/Navbar/Navbar";
+import { Navbar } from "../../Components/Common/Navbar/Navbar";
 import { useHolderjs } from "use-holderjs";
 
 export const IndexScreen = () => {
