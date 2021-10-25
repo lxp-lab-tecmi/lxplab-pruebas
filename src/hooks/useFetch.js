@@ -26,9 +26,7 @@ export const useFetch = (url) => {
                             error: null
                         })
                     }
-                    
                 }
-
             })
             .catch(error => {
                 setState({
