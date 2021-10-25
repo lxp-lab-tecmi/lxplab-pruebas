@@ -1,0 +1,13 @@
+.cards__card{
+    background-color: darken($background, 5%);
+    border: 2px solid $accent;
+    margin: 1.5%;
+    width: 30%;
+
+    .cards__title{
+        background-color: $primary;
+        color: white;
+        margin: auto;
+        text-align: center;
+    }
+}

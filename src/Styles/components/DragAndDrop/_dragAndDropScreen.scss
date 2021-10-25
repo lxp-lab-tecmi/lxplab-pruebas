@@ -1,0 +1,19 @@
+@import "./questions";
+@import "./cards";
+@import "./card";
+
+.dragAndDrop__container {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .dragAndDrop__container {
+        width: 85%;
+    }
+}
+
+@media (min-width: 1080px) {
+    .dragAndDrop__container {
+        width: 65%;
+    }
+}

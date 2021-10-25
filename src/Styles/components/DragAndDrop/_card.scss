@@ -1,0 +1,11 @@
+.card__container{
+    min-height: 40px;
+
+    .card__option{
+        background-color: $background;
+        border-radius: 5px;
+        font-size: medium;
+        margin: 10px 3px;
+        text-align: center;
+    }
+}

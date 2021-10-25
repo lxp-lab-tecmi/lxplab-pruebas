@@ -5,7 +5,7 @@ const axios = require('axios');
 export const useFetch = (url) => {
 
     const isMounted = useRef(true)
-    const [state, setstate] = useState({ data: null, loading: true, error: null })
+    const [state, setState] = useState({ data: null, loading: true, error: null })
 
     useEffect(() => {
         return () => {
@@ -15,20 +15,23 @@ export const useFetch = (url) => {
 
     useEffect(() => {
 
-        setstate({ data: null, loading: true, error: null })
+        setState({ data: null, loading: true, error: null })
         axios.get(url)
             .then(data => {
                 if (isMounted.current) {
-                    setstate({
-                        data: data.data,
-                        loading: false,
-                        error: null
-                    })
+                    if(data.data.code === 1){
+                        setState({
+                            data: data.data.data,
+                            loading: false,
+                            error: null
+                        })
+                    }
+                    
                 }
 
             })
             .catch(error => {
-                setstate({
+                setState({
                     data: null,
                     loading: false,
                     error: 'Toy malito'
@@ -36,7 +39,5 @@ export const useFetch = (url) => {
             })
 
     }, [url])
-
-
     return state;
 }
